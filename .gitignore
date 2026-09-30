@@ -1,0 +1,18 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+
+# Node / 前端构建产物
+node_modules/
+frontend/dist/
+
+# 本地数据（课程文件、音频、转写、SQLite）
+data/
+
+# 环境与编辑器
+.env
+.vscode/
+.idea/
+.mimosa/
+*.log
