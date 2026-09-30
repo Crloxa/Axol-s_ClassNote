@@ -16,7 +16,7 @@
 | Node | v22.23.2，前端已构建进 `frontend/dist`（由后端静态托管，单进程） |
 | 启动 | 双击 `start.bat` 或 `.venv\Scripts\python.exe backend\run.py` → http://127.0.0.1:8000 |
 | 数据目录 | 默认 `<仓库>/data`（已 gitignore）；用环境变量 `AXOL_DATA_DIR` 改到任意位置 |
-| 网络注意 | 本机直连 GitHub 会被重置，仓库级 git 代理已配为 `http://127.0.0.1:7897`（仅此仓库生效）；首次转写下载 whisper 模型前设 `HF_ENDPOINT=https://hf-mirror.com` |
+| 网络注意 | GitHub 直连 HTTPS 在本机不稳（间歇重置）；首次曾用本机代理 7897 完成连接，之后 **push 地址已切换为 SSH**（`git@github.com:Crloxa/Axol-s_ClassNote.git`，端口 22 实测可用，备用 `ssh.github.com:443`）；首次转写下载 whisper 模型前设 `HF_ENDPOINT=https://hf-mirror.com` |
 
 ## 3. 已验证（对应需求 §9 MVP 验收）
 
@@ -87,4 +87,5 @@ data/             运行时数据（axol.db、lessons/<id>/ppt|sources|audio）�
 - **转写报下载模型失败**：设 `HF_ENDPOINT=https://hf-mirror.com` 后重启，或先在设置里把模型切 `tiny`。
 - **测试/脚本请求本机 API 失败但 curl 正常**：系统代理会劫持 httpx，加 `trust_env=False`（见 smoke_api.py）。
 - **换数据盘**：`set AXOL_DATA_DIR=D:\axol-data` 后启动；SQLite 与文件目录会一起建过去。
-- **git 推送失败**：确认本机代理端口仍是 7897（`git config --local http.proxy`）。
+- **git 推送失败**：HTTPS 直连 GitHub 不稳时改走 SSH（已配 `pushurl = git@github.com:Crloxa/Axol-s_ClassNote.git`）；
+  SSH 22 端口被断时用 `ssh.github.com:443`（在 `~/.ssh/config` 加 `Host github.com\n  Hostname ssh.github.com\n  Port 443`）。
