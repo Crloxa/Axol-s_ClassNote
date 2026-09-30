@@ -23,7 +23,7 @@ cd ..
 .venv\Scripts\python.exe backend\run.py
 ```
 
-打开 <http://127.0.0.1:8000>（只监听本机回环地址）。
+打开 <http://127.0.0.1:18471>（只监听本机回环地址）。
 
 ## 使用流程
 
@@ -62,7 +62,7 @@ set HF_ENDPOINT=https://hf-mirror.com
 ```bat
 :: 后端（自动重载）
 cd backend && ..\.venv\Scripts\python.exe -m uvicorn app.main:app --reload --port 8000
-:: 前端开发服务器（/api 代理到 8000）
+:: 前端开发服务器（/api 代理到 18471）
 cd frontend && npm run dev
 ```
 

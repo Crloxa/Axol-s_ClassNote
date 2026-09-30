@@ -14,7 +14,7 @@
 | --- | --- |
 | Python | 3.13.15（需求写 3.11；全部依赖在 3.13 验证可用，faster-whisper 1.2.1 / ctranslate2 4.8.2） |
 | Node | v22.23.2，前端已构建进 `frontend/dist`（由后端静态托管，单进程） |
-| 启动 | 双击 `start.bat` 或 `.venv\Scripts\python.exe backend\run.py` → http://127.0.0.1:8000 |
+| 启动 | 双击 `start.bat` 或 `.venv\Scripts\python.exe backend\run.py` → http://127.0.0.1:18471 |
 | 数据目录 | 默认 `<仓库>/data`（已 gitignore）；用环境变量 `AXOL_DATA_DIR` 改到任意位置 |
 | 网络注意 | GitHub 直连 HTTPS 在本机不稳（间歇重置）；首次曾用本机代理 7897 完成连接，之后 **push 地址已切换为 SSH**（`git@github.com:Crloxa/Axol-s_ClassNote.git`，端口 22 实测可用，备用 `ssh.github.com:443`）；首次转写下载 whisper 模型前设 `HF_ENDPOINT=https://hf-mirror.com` |
 
@@ -63,7 +63,7 @@ backend/
     generate.py   范围物化(materialize)、发送预览+令牌、本地规则整理、模型提示词(需求§8原文)
     api.py        全部 REST 端点（21 个，见 /api/docs 的 OpenAPI）
     main.py       装配：CORS(仅 5173 开发用) + 托管 frontend/dist
-  run.py          uvicorn 只监听 127.0.0.1:8000
+  run.py          uvicorn 只监听 127.0.0.1:18471（非常用端口，改端口只需改这一处 + frontend/vite.config.ts 的开发代理）
   tests/smoke_api.py  端到端冒烟（可选 wav 测转写）
 frontend/src/
   App.tsx         三栏 UI 全部交互（录音器、快捷键 M、范围选择、预览弹窗、结果编辑）

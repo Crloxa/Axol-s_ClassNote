@@ -1,5 +1,5 @@
 @echo off
-rem 课堂复习 Agent - 本机启动脚本（只监听 127.0.0.1:8000）
+rem 课堂复习 Agent - 本机启动脚本（只监听 127.0.0.1:18471）
 cd /d "%~dp0"
 
 if not exist ".venv\Scripts\python.exe" (
@@ -15,6 +15,6 @@ if not exist "frontend\dist\index.html" (
   pause & exit /b 1
 )
 
-echo 启动课堂复习 Agent： http://127.0.0.1:8000  （Ctrl+C 退出）
+echo 启动课堂复习 Agent： http://127.0.0.1:18471  （Ctrl+C 退出）
 cd backend
 "..\.venv\Scripts\python.exe" run.py

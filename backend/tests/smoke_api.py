@@ -1,6 +1,6 @@
 """端到端冒烟测试（不联网调用模型）。
 
-前置：后端已在 127.0.0.1:8000 运行；用法：
+前置：后端已在 127.0.0.1:18471 运行；用法：
     .venv/Scripts/python backend/tests/smoke_api.py [speech.wav]
 传入 wav 时会额外验证录音/转写链路；wav 必须位于项目目录内（只读该文件）。
 """
@@ -12,7 +12,7 @@ from pathlib import Path
 
 import httpx
 
-BASE = "http://127.0.0.1:8000/api"
+BASE = "http://127.0.0.1:18471/api"
 PROJECT_DIR = Path(__file__).resolve().parents[2]
 client = httpx.Client(base_url=BASE, timeout=120, trust_env=False)  # 本机测试不走系统代理
 
@@ -152,7 +152,7 @@ def main():
     ok("远程预览显示服务商信息", pv["provider"]["label"] == "DeepSeek" and pv["provider"]["has_key"] is False)
 
     # ---- 出站安全：拒绝内网端点 ----
-    r = client.put("/providers/deepseek", json={"base_url": "http://127.0.0.1:8000/api"})
+    r = client.put("/providers/deepseek", json={"base_url": "http://127.0.0.1:18471/api"})
     ok("SSRF 防护拒绝内网端点", r.status_code == 400, (r.json().get("detail") or "")[:40])
 
     # ---- 录音转写链路（可选，传 wav 才测）----

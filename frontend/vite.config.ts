@@ -5,7 +5,7 @@ export default defineConfig({
   plugins: [react()],
   server: {
     port: 5173,
-    proxy: { '/api': 'http://127.0.0.1:8000' },
+    proxy: { '/api': 'http://127.0.0.1:18471' },
   },
   build: { outDir: 'dist', chunkSizeWarningLimit: 1200 },
 })
